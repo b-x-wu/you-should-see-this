@@ -3,6 +3,8 @@ $(document).ready(function() {
 	applyLink();
 	// update the link
 	$('#btnShow').on('click', updateLink);
+
+	$('#btnReport').on('click', deleteLink);
 });
 
 function applyLink() {
@@ -31,6 +33,26 @@ function updateLink(event) {
 			} else {
 				alert(response.msg);
 			}
-		})
+		});
+	}
+}
+
+function deleteLink(event) {
+	event.preventDefault();
+	var confirmation = confirm('Are you sure you want to report?');
+	if (confirmation) {
+		$.ajax({
+			type : 'DELETE',
+			url : '/deletepin'
+		}).done(function(response) {
+			if (response.msg === '') {
+				applyLink();
+				alert('Report successful');
+			} else {
+				alert(response.msg);
+			}
+		});
+	} else {
+		return false;
 	}
 }

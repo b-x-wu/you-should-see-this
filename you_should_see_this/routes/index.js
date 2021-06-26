@@ -14,7 +14,7 @@ server.listen(5000);
 router.get('/', function(req, res, next) {
   // let forwarded = req.headers['x-forwarded-for'];
   // let address = forwarded ? forwarded.split(/, /)[0] : req.connection.remoteAddress;
-  res.render('index', { title: 'Express'});
+  res.render('index', { title: 'Express' });
 });
 
 router.post('/addpin', function(req, res) {
@@ -30,10 +30,17 @@ router.post('/addpin', function(req, res) {
 router.get('/toppin', function(req, res) {
   var db = req.db;
   var pins = db.get('pins');
-  pins.findOne({}, { sort : {_id : -1 } }, function(e, docs) {
+  pins.findOne({}, { sort : { _id : -1 } }, function(e, docs) {
     res.json(docs);
   })
 })
 
+router.delete('/deletepin', function(req, res) {
+  var db = req.db;
+  var pins = db.get('pins');
+  pins.findOneAndDelete({}, { sort : { _id : -1 } }, function(e, docs) {
+    res.send((e === null) ? {msg : ''} : {msg : e});
+  });
+})
 
 module.exports = router;
