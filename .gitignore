@@ -1,4 +1,5 @@
-/you_should_see_this/node_modules
-/you_should_see_this/npm-debug.log
-/you_should_see_this/.DS_Store
-/you_should_see_this/*.env
+/node_modules
+npm-debug.log
+*.DS_Store
+*.env
+/data
