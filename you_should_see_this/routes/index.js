@@ -2,13 +2,13 @@ var express = require('express');
 const http = require('http');
 var router = express.Router();
 
-function requestListener(req, res) {
-  let forwarded = req.headers['x-forwarded-for'];
-  let ip = forwarded ? forwarded.split(/, /)[0] : req.connection.remoteAddress;
-  res.send(ip);
-}
-const server = http.createServer(requestListener);
-server.listen(5000);
+// function requestListener(req, res) {
+//   let forwarded = req.headers['x-forwarded-for'];
+//   let ip = forwarded ? forwarded.split(/, /)[0] : req.connection.remoteAddress;
+//   res.send(ip);
+// }
+// const server = http.createServer(requestListener);
+// server.listen(5000);
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
