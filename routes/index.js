@@ -19,7 +19,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/addpin', function(req, res) {
   var db = req.db;
-  var pins = db.get('pins');
+  var pins = db.collection('pins');
   pins.insert(req.body, function(e, result) {
     res.send(
       (e === null) ? {msg : ''} : {msg : e}
@@ -29,7 +29,7 @@ router.post('/addpin', function(req, res) {
 
 router.get('/toppin', function(req, res) {
   var db = req.db;
-  var pins = db.get('pins');
+  var pins = db.collection('pins');
   pins.findOne({}, { sort : { _id : -1 } }, function(e, docs) {
     res.json(docs);
   })
@@ -37,7 +37,7 @@ router.get('/toppin', function(req, res) {
 
 router.delete('/deletepin', function(req, res) {
   var db = req.db;
-  var pins = db.get('pins');
+  var pins = db.collection('pins');
   pins.findOneAndDelete({}, { sort : { _id : -1 } }, function(e, docs) {
     res.send((e === null) ? {msg : ''} : {msg : e});
   });
