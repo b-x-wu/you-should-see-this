@@ -22,7 +22,7 @@ router.post('/addpin', function(req, res) {
   var pins = db.collection('pins');
   pins.insert(req.body, function(e, result) {
     res.send(
-      (e === null) ? {msg : ''} : {msg : e}
+      (e === null) ? {msg : ''} : {msg : "Add pin Error: " + e}
     );
   });
 });
@@ -39,7 +39,7 @@ router.delete('/deletepin', function(req, res) {
   var db = req.db;
   var pins = db.collection('pins');
   pins.findOneAndDelete({}, { sort : { _id : -1 } }, function(e, docs) {
-    res.send((e === null) ? {msg : ''} : {msg : e});
+    res.send((e === null) ? {msg : ''} : {msg : "Delete pin Error: " + e});
   });
 })
 

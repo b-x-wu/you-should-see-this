@@ -15,10 +15,10 @@ function applyLink() {
 
 function updateLink(event) {
 	event.preventDefault();
-	var newURL = {'url' : $('#inputURL').val()}
+	var newURL = {'url' : $('#inputURL').val()};
 	if (newURL === {'url' : ''}) {
-		alert('Please enter a URL.')
-		return false
+		alert('Please enter a URL.');
+		return false;
 	} else {
 		$.ajax({
 			type : "POST",

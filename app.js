@@ -7,7 +7,7 @@ var logger = require('morgan');
 var { MongoClient } = require('mongodb');
 // var monk = require('monk');
 
-const uri = process.env.MONGODB_URI;
+const uri = process.env.MONGODB_URI || "mongodb+srv://bruce-x-wu:3m3jnWePlOtNW7OH@ysst-east.npolf.mongodb.net/ysst?retryWrites=true";
 const client = new MongoClient(uri);
 
 var db;
@@ -17,7 +17,7 @@ async function run() {
     db = await client.db("ysst"); //.command({ ping : 1 });
     console.log("Successful connection.");
   } finally {
-    await client.close();
+    // await client.close();
   }
 }
 
