@@ -4,9 +4,26 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var mongo = require('mongodb');
-var monk = require('monk');
-var db = monk('localhost:27017/ysst')
+var { MongoClient } = require('mongodb');
+// var monk = require('monk');
+
+const uri = process.env.MONGODB_URI;
+const client = new MongoClient(uri);
+
+var db;
+async function run() {
+  try {
+    await client.connect();
+    db = await client.db("ysst"); //.command({ ping : 1 });
+    console.log("Successful connection.");
+  } finally {
+    await client.close();
+  }
+}
+
+run().catch(console.dir);
+
+// var db = monk('localhost:27017/ysst');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
