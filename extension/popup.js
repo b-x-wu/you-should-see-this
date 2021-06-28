@@ -2,6 +2,7 @@ const url = 'https://ytts.herokuapp.com' // add deployment url
 var btnShow = document.getElementById('btnShow');
 var aSee = document.getElementById('see');
 var btnReport = document.getElementById('btnReport');
+var debug = document.getElementById('debug')
 
 async function updateLink() {
 	let oReq = new XMLHttpRequest();
@@ -11,7 +12,7 @@ async function updateLink() {
 		if (oReq.readyState === 4 && oReq.status === 200) {
 			aSee.href = oReq.response["url"];
 		} else if (oReq.readyState === 4 && oReq.status !== 200) {
-			console.log("Get request error.")
+			debug.innerHTML = ("Get request error.");
 		}
 	}
 	oReq.send();
@@ -34,7 +35,7 @@ btnShow.addEventListener("click", async () => {
     	if (oReq.readyState === 4 && oReq.status === 200) {
     		updateLink();
     	} else if (oReq.readyState === 4 && oReq.status !== 200) {
-			console.log("Add request error.")
+			debug.innerHTML = ("Add request error.");
 		}
 	}
 	oReq.send(JSON.stringify({ "url" : newURL }));
