@@ -2,6 +2,9 @@ var express = require('express');
 const http = require('http');
 var router = express.Router();
 
+var bodyParser = require('body-parser');
+var jsonParser = bodyParser.json();
+
 // function requestListener(req, res) {
 //   let forwarded = req.headers['x-forwarded-for'];
 //   let ip = forwarded ? forwarded.split(/, /)[0] : req.connection.remoteAddress;
@@ -17,7 +20,7 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-router.post('/addpin', function(req, res) {
+router.post('/addpin', jsonParser, function(req, res) {
   var db = req.db;
   var pins = db.collection('pins');
   pins.insert(req.body, function(e, result) {

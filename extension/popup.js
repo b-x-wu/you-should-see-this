@@ -4,14 +4,6 @@ var aSee = document.getElementById('see');
 var btnReport = document.getElementById('btnReport');
 var debug = document.getElementById('debug')
 
-// var page_url = 'no url';
-// chrome.runtime.onMessage.addListener(function (req, sender, sendResponse) {
-// 	page_url = 'passed into listener'
-// 	if (request.message === 'sending url') {
-// 		page_url = req.url;
-// 	}
-// });
-
 async function updateLink() {
 	debug.innerHTML = ("Starting to update");
 	let oReq = new XMLHttpRequest();
