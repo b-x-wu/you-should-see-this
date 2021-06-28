@@ -3,11 +3,12 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var bodyParser = require('body-parser');
 
 var { MongoClient } = require('mongodb');
 // var monk = require('monk');
 
-const uri = process.env.MONGODB_URI || "mongodb+srv://bruce-x-wu:3m3jnWePlOtNW7OH@ysst-east.npolf.mongodb.net/ysst?retryWrites=true";
+const uri = process.env.MONGODB_URI;
 const client = new MongoClient(uri);
 
 var db;
@@ -39,6 +40,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(bodyParser.json());
 
 app.use(function(req, res, next) {
   req.db = db;
