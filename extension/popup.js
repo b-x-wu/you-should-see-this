@@ -29,20 +29,21 @@ btnShow.addEventListener("click", async () => {
 	chrome.tabs.query({ active : true, currentWindow : true }, function(tabs) {
 		newURL = tabs[0].id;
 	});
-
-	// send the new url to the database
-	let oReq = new XMLHttpRequest();
-	oReq.open("POST", url + "/addpin", true);
-	oReq.setRequestHeader("Content-Type", "application/json");
-	oReq.responseType = "json";
-	oReq.onreadystatechange = function() {
-    	if (oReq.readyState === 4 && oReq.status === 200) {
-    		updateLink();
-    	} else if (oReq.readyState === 4 && oReq.status !== 200) {
-			debug.innerHTML = ("Add request error.");
-		}
-	}
-	oReq.send(JSON.stringify({ "url" : newURL }));
+	debug.innerHTML = newURL;
+	
+	// // send the new url to the database
+	// let oReq = new XMLHttpRequest();
+	// oReq.open("POST", url + "/addpin", true);
+	// oReq.setRequestHeader("Content-Type", "application/json");
+	// oReq.responseType = "json";
+	// oReq.onreadystatechange = function() {
+ //    	if (oReq.readyState === 4 && oReq.status === 200) {
+ //    		updateLink();
+ //    	} else if (oReq.readyState === 4 && oReq.status !== 200) {
+	// 		debug.innerHTML = ("Add request error.");
+	// 	}
+	// }
+	// oReq.send(JSON.stringify({ "url" : newURL }));
 
 });
 
