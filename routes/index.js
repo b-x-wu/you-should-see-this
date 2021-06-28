@@ -2,6 +2,8 @@ var express = require('express');
 const http = require('http');
 var router = express.Router();
 
+express.json();
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title : 'Express' });
@@ -10,11 +12,12 @@ router.get('/', function(req, res, next) {
 router.post('/addpin', function(req, res) {
   var db = req.db;
   var pins = db.collection('pins');
-  pins.insert(req.body, function(e, result) {
-    res.send(
-      (e === null) ? { msg : '', body : req.body } : { msg : "Add pin Error: " + e }
-    );
-  });
+  res.send({ debug : "", body : req.body });
+  // pins.insert(req.body, function(e, result) {
+  //   res.send(
+  //     (e === null) ? { msg : '', body : req.body } : { msg : "Add pin Error: " + e }
+  //   );
+  // });
 });
 
 router.get('/toppin', function(req, res) {
