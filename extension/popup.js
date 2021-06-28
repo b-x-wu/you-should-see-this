@@ -1,4 +1,4 @@
-const url = '' // add deployment url
+const url = 'https://ytts.herokuapp.com' // add deployment url
 var btnShow = document.getElementById('btnShow');
 var aSee = document.getElementById('see');
 var btnReport = document.getElementById('btnReport');
