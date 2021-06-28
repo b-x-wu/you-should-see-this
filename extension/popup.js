@@ -1,16 +1,20 @@
-const url = 'https://ytts.herokuapp.com' // add deployment url
+const url = 'https://ysst.herokuapp.com' // add deployment url
 var btnShow = document.getElementById('btnShow');
 var aSee = document.getElementById('see');
 var btnReport = document.getElementById('btnReport');
 var debug = document.getElementById('debug')
 
+
+
 async function updateLink() {
+	debug.innerHTML = ("Starting to update");
 	let oReq = new XMLHttpRequest();
 	oReq.open("GET", url + "/toppin", true);
-	oReq.responseType = "json";
+	// oReq.responseType = "json";
 	oReq.onreadystatechange = function() {
 		if (oReq.readyState === 4 && oReq.status === 200) {
-			aSee.href = oReq.response["url"];
+			// debug.innerHTML = (JSON.parse(oReq.response)["url"]);
+			aSee.href = JSON.parse(oReq.response)["url"];
 		} else if (oReq.readyState === 4 && oReq.status !== 200) {
 			debug.innerHTML = ("Get request error.");
 		}

@@ -5,8 +5,12 @@
 	"manifest_version" : 3,
 	"permissions" : [
 		"activeTab",
-		"tabs",
-		"https://ytts.herokuapp.com"
+		"tabs"
 	],
-	"action" : "popup.html",
+	"host_permissions" : [
+		"https://ysst.herokuapp.com/*"
+	],
+	"action" : {
+		"default_popup" : "popup.html"
+	}
 }

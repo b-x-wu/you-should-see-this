@@ -43,4 +43,12 @@ router.delete('/deletepin', function(req, res) {
   });
 })
 
+router.get('/allpins', function(req, res) {
+  var db = req.db;
+  var pins = db.collection('pins');
+  pins.find({}, { sort : {_id : -1 } }, function(e, docs) {
+    res.json(docs);
+  });
+});
+
 module.exports = router;
