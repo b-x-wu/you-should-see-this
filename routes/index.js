@@ -22,7 +22,7 @@ router.post('/addpin', function(req, res) {
   var pins = db.collection('pins');
   pins.insert(req.body, function(e, result) {
     res.send(
-      (e === null) ? {msg : ''} : {msg : "Add pin Error: " + e}
+      (e === null) ? {msg : req.body} : {msg : "Add pin Error: " + e}
     );
   });
 });
