@@ -15,6 +15,9 @@
 		"https://ysst.herokuapp.com/*"
 	],
 	"action" : {
-		"default_popup" : "popup.html"
+		"default_popup" : "popup.html",
+		"default_icon" : {
+			"128" : "/images/eyes_128.png"
+		}
 	}
 }
