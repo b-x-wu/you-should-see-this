@@ -5,7 +5,7 @@ var btnReport = document.getElementById('btnReport');
 var debug = document.getElementById('debug')
 
 async function updateLink() {
-	debug.innerHTML = ("Starting to update");
+	// debug.innerHTML = ("Starting to update");
 	let oReq = new XMLHttpRequest();
 	oReq.open("GET", url + "/toppin", true);
 	// oReq.responseType = "json";
@@ -23,31 +23,29 @@ async function updateLink() {
 btnShow.addEventListener("click", async () => {
 
 	// get the new url from the active tab
-	let newURL;
 	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
         if(tabs.length == 0){ 
-            debug.innerHTML = "could not send mesage to current tab";
+            console.log("could not send mesage to current tab");
         } else {
-        	newURL = tabs[0].url;
-            debug.innerHTML = newURL;
+        	let newURL = tabs[0].url;
+        	console.log("got newURL");
+
+        	// send the new url to the database
+			let oReq = new XMLHttpRequest();
+			oReq.open("POST", url + "/addpin", true);
+			oReq.setRequestHeader("Content-Type", "application/json");
+			// oReq.responseType = "json";
+			oReq.onreadystatechange = function() {
+		    	if (oReq.readyState === 4 && oReq.status === 200) {
+		    		updateLink();
+		    		debug.innerHTML += "\ndone + " + oReq.responseText;
+		    	} else if (oReq.readyState === 4 && oReq.status !== 200) {
+					debug.innerHTML = ("Add request error.");
+				}
+			}
+			oReq.send(JSON.stringify({ "url" : newURL }));
         }
     });
-	
-
-	// send the new url to the database
-	let oReq = new XMLHttpRequest();
-	oReq.open("POST", url + "/addpin", true);
-	oReq.setRequestHeader("Content-Type", "application/json");
-	// oReq.responseType = "json";
-	oReq.onreadystatechange = function() {
-    	if (oReq.readyState === 4 && oReq.status === 200) {
-    		updateLink();
-    		debug.innerHTML = "done + " + oReq.responseText;
-    	} else if (oReq.readyState === 4 && oReq.status !== 200) {
-			debug.innerHTML = ("Add request error.");
-		}
-	}
-	oReq.send(JSON.stringify({ "url" : newURL }));
 
 });
 
