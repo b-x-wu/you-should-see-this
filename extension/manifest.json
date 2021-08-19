@@ -1,10 +1,13 @@
 {
 	"name" : "You Should See This",
-	"description" : "...",
+	"description" : "Leave hidden links for each other.",
 	"version" : "0.0.1",
 	"manifest_version" : 3,
 	"background" : {
 		"service_worker" : "background.js"
+	},
+	"icons" : {
+		"128" : "/images/eyes_128.png"
 	},
 	"permissions" : [
 		"activeTab",
